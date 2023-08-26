@@ -17,81 +17,24 @@ export default function Scene() {
 
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
-      gsap.to(rocket.current, {
-        x: '100vw',
-        y: '0vh',
-        scale: 0.5,
-        rotate: 100,
-        ease: "ease.in",
-          scrollTrigger: {
-            trigger: slider.current,
-            start: "top top",
-            end: "+=500",
-            scrub: 1,
-            pin: true,
-        }
-      })
-
-      gsap.to(level1FallOf.current, {
-        x:'100vw',
-        y: '0',  
-        rotate: 360,
-        scale: 0,
-        ease: "bounce.out",
-          scrollTrigger: {
-            trigger: rocket.current,
-            start: "top top",
-            end: "+=100",
-            scrub: 1,
-            pin: true,
-        }
-      })
-      gsap.to(level2FallOf.current, {
-        x:'100vw',
-        y: '0',  
-        rotate: 60,
-        scale: 0,
-        ease: "bounce.out",
-          scrollTrigger: {
-            trigger: rocket.current,
-            start: "top top",
-            end: "+=200",
-            scrub: 1,
-            pin: true,
-        }
-      })
-      gsap.to(level3FallOf.current, {
-        x:'100vw',
-        y: '0',  
-        rotate: 800,
-        scale: 0,
-        ease: "bounce.out",
-          scrollTrigger: {
-            trigger: rocket.current,
-            start: "+=0",
-            end: "+=300",
-            scrub: 2,
-            pin: true,
-        }
-      })
-      gsap.to(level4FallOf.current, {
-        x:'80vw',
-        y: '0',  
-        rotate: -80,
-        scale: 0,
-        ease: "bounce.out",
-          scrollTrigger: {
-            trigger: rocket.current,
-            start: "+=300",
-            end: "+=500",
-            scrub: 2,
-            pin: true,
-        }
-      })
-    })
       
+      const panels = gsap.utils.toArray(".panel");
+      gsap.to(panels, {
+        xPercent: -100 * (panels.length - 1),
+        ease: "none",
+        scrollTrigger: {
+          trigger: slider.current,
+          pin: true,
+          scrub: 1,
+          snap: 1 / (panels.length - 1),
+          end: () => "+=" + (slider.current as unknown as HTMLElement).offsetWidth,
+          markers: true
+        }
+      });
+      
+    })
     return () => ctx.revert();
-  },[slider])
+  },[slider,component])
 
   return (
     <div className="App" ref={component}>
@@ -103,9 +46,12 @@ export default function Scene() {
         <div ref={rocket} className="rocket">
           <img src={rocketLevel4} ref={level4FallOf} alt="rocket" className="rocket-parts"/>
           <img src={rocketLevel3} ref={level3FallOf} alt="rocket" className="rocket-parts"/>
-        <img src={rocketLevel2}  ref={level2FallOf} alt="rocket" className="rocket-parts"/>
-        <img src={rocketLevel1} ref={level1FallOf} alt="rocket" className="rocket-parts"/>
+          <img src={rocketLevel2}  ref={level2FallOf} alt="rocket" className="rocket-parts"/>
+          <img src={rocketLevel1} ref={level1FallOf} alt="rocket" className="rocket-parts"/>
         </div>
+        <div className="panel red">ONE</div>
+        <div className="panel orange">TWO</div>
+        <div className="panel purple">THREE</div>
       </div>
       <div  className="lastContainer">Last Container</div>
     </div>
