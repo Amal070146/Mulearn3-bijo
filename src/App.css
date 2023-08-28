@@ -17,16 +17,6 @@
   display: flex;
   flex-wrap: wrap;
   background-color: #2b2b2b;
-  background-size: contain;
-  background-repeat: repeat-x;
-  width: 4000px;
-  position: relative;
-}
-.sky{
-  position: absolute;
-    height: 100%;
-    z-index: -1;
-    overflow: scroll;
 }
 
 .firstContainer {
@@ -64,3 +54,4 @@
 .blue {
   background-color: blue;
 }
+
