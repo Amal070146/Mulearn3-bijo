@@ -1,15 +1,69 @@
+@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans&display=swap");
 .container {
-    height: 100vh;
-    display: flex;
-    flex-wrap: wrap;
-    background-color: #2b2b2b;
-  }
-  .rocket{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-  .rocket-parts{
-    width: 50%;
-  }
-  
+  min-height: 100vh;
+  background-color: #2b2b2b;
+  position: relative;
+  overflow: hidden;
+}
+
+.rocket-parts {
+  width: 20%;
+}
+.nightSky {
+  position: absolute;
+  height: 100vh;
+  object-position: center;
+  z-index: -1;
+}
+.frame {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 400px;
+  color: #aaa;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-weight: 400;
+  height: fit-content;
+}
+.frame .text-wrapper {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+.frame .basic-enablement {
+  font-size: 14px;
+}
+.part {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: fit-content;
+}
+.headers {
+  padding: 10px;
+  padding-top: 20px;
+  width: 100%;
+  min-height: fit-content;
+}
+.header-text {
+  text-align: center;
+  min-height: 87px;
+  top: 0;
+  left: 0;
+  text-shadow: 0px 1px 0px #00000012;
+  background: linear-gradient(
+    180deg,
+    rgb(255, 255, 255) 0%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  -webkit-background-clip: text !important;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-family: "Plus Jakarta Sans-Bold", Helvetica;
+  font-weight: 700;
+  color: transparent;
+  font-size: 60px;
+  text-align: center;
+  letter-spacing: 0;
+  line-height: 86.4px;
+  white-space: nowrap;
+}
