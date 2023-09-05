@@ -237,6 +237,22 @@ const Rocket = () => {
       },'+=1').to(pathWay.current , {
         opacity:0,
       },'-=0.8')
+      .to(
+        rocket.current,{
+          rotate:90,
+          x:50,
+          y:0,
+          scale:2,
+          duration:2,
+        },'+=1'
+      )
+      .to(
+        rocket.current,{
+          x:500,
+          y:50,
+          duration:2
+        }
+      )
       return anime
     }
     useLayoutEffect(() => {
