@@ -1,4 +1,4 @@
-import {  useLayoutEffect, useRef } from 'react'
+import {  useLayoutEffect, useMemo, useRef } from 'react'
 import rocketLevel1 from "../assets/level1.png"
 import rocketLevel2 from "../assets/level2.png"
 import rocketLevel3 from "../assets/level3.png"
@@ -8,6 +8,17 @@ import ScrollTrigger from "gsap/ScrollTrigger";
 import { MotionPathPlugin } from "gsap/MotionPathPlugin";
 import './Rocket.css'
 import path from '../assets/path.svg'
+import { setFrames } from './AnimationFunc/pin'
+import { level4Entrance } from './AnimationFunc/level4Entrance'
+import { level1Entrance } from './AnimationFunc/level1Entrance'
+import { intro } from './AnimationFunc/intro'
+import { rocketEntrance } from './AnimationFunc/rocketEntrance'
+import { level3Entrance } from './AnimationFunc/level3Entrance'
+import { level2Entrance } from './AnimationFunc/level2Entrance'
+import Earth from '../assets/earth.svg'
+import { planet1 } from './AnimationFunc/planet1'
+import { planet2 } from './AnimationFunc/planet2'
+import Moon from '../assets/moon.svg'
 const desc=`Basic Enablement Tasks
 This marks the start and the overview of µLearn
 foundation. Ivde enthelum okke data indakki 
@@ -18,243 +29,27 @@ const Rocket = () => {
     const slider = useRef(null);
     const pathWay = useRef(null);
     const rocket = useRef(null);
-    const level1FallOf= useRef(null),level2FallOf= useRef(null),level3FallOf= useRef(null),level4FallOf= useRef(null);
     const descLevel1= useRef(null),descLevel2= useRef(null),descLevel3= useRef(null),descLevel4= useRef(null);
     const journey = useRef(null);
     const journeyLevel1= useRef(null),journeyLevel2= useRef(null),journeyLevel3= useRef(null),journeyLevel4= useRef(null);
-    function setFrames() {
-      const gs=[descLevel1,descLevel2,descLevel3,descLevel4,pathWay]
-      const anim=gsap.timeline();
-      anim.from(slider.current, {
-        scrollTrigger: {
-          trigger: slider.current,
-          start: "top 0",
-          end: "+=5500",
-          scrub: 3,
-          pin: true
-        }
-      })
-      gs.forEach((ref)=>{anim.fromTo(ref.current, {scale:0},{scale:0})})
-      return anim
-    }
-    function intro() {
-      const anim=gsap.timeline();
-      anim.from(journey.current, {
-        duration: 1, opacity: 0, y: -500,
-        ease: "power3.inOut",
-        scrollTrigger: {
-          trigger: slider.current,
-          start: "top center",
-          end: "top bottom",
-          scrub: 3,
-        }
-      })
-      return anim
-    }
-    function rocketEntrance(){
-      const anim=gsap.timeline({
-        scrollTrigger: {
-          trigger: slider.current,
-          start: "100 bottom-=300",
-          end: "bottom bottom",
-          scrub: 3,
-        }
-      });
-        anim.fromTo(rocket.current , {
-          opacity: 0,y:1000,
-        }, {
-          duration: 1.5, opacity: 1,y:50,
-          ease: "ease.in",
-        })
-        
-      return anim
-    }
-    function level1Entrance(){
-      const anim=gsap.timeline({
-        scrollTrigger: {
-          trigger: slider.current,
-          start: "1100",
-          end: "2200",
-          scrub: 3,
-        }
-      });
-      anim.fromTo(pathWay.current ,{
-        x:255,
-        y:400,
-        scale:1,
-        opacity:0
-      }, {
-        duration: 2, 
-        opacity: 1,
-        scale:1,
-        x:255,
-        y:400,
-        ease: "ease.out",})
-        anim.fromTo(descLevel1.current ,{
-          x:500,
-          y:350,
-          scale:1,
-          opacity:0
-        }, {
-          duration: 2, opacity: 1,scale:1,
-          x:330,
-          y:350,
-          ease: "ease.out",})
-          .to(descLevel1.current , {  
-            opacity:0,
-            duration: 2,
-          }).to(pathWay.current , {
-            opacity: 0,
-            duration: 1.5
-          })
-          .to(journeyLevel1.current , {
-              position: "absolute",
-              y: 100 ,
-              x: -200,
-              duration: 3,scale:0,
-              rotate: 360,
-              ease: "ease.out",
-            },'+=2') 
-        
-        return anim
-    }
-    function level2Entrance(){
-      const anime=gsap.timeline({
-        scrollTrigger: {
-          trigger: slider.current,
-          start: "2100",
-          end: "3200",
-          scrub: 3,
-        }
-      }).fromTo(pathWay.current ,{
-        x:255,
-        y:300,
-        scale:1,
-        opacity:0,
-      },{
-        x:255,
-        y:300,
-        scale:1,
-        opacity:1
-      }).fromTo(descLevel2.current ,{
-        x:500,
-        y:250,
-        opacity:0,
-        scale:1,
-      },{
-        opacity:1,
-        x:330,
-        y:250,
-        scale:1
-      }).to(descLevel2.current , {
-        opacity:0,
-        x:700,
-      },'+=1').to(pathWay.current , {
-        opacity:0,
-      },'-=0.8').to(journeyLevel2.current , {
-        x:200,
-        y:300,
-        duration:1,
-        scale:0,
-        rotate: 520,
-      })
-      return anime
-    }
-    function level3Entrance(){
-      const anime=gsap.timeline({
-        scrollTrigger: {
-          trigger: slider.current,
-          start: "3210",
-          end: "4200",
-          scrub: 3,
-        }
-      }).fromTo(pathWay.current ,{
-        x:255,
-        y:200,
-        scale:1,
-        opacity:0,
-      },{
-        x:255,
-        y:200,
-        scale:1,
-        opacity:1
-      }).fromTo(descLevel3.current ,{
-        x:500,
-        y:150,
-        opacity:0,
-        scale:1,
-      },{
-        opacity:1,
-        x:330,
-        y:150,
-        scale:1
-      } ).to(descLevel3.current , {
-        x:600,
-        opacity:0,
-      },'+=1').to(pathWay.current , {
-        opacity:0,
-
-      },'-=0.8').to(journeyLevel3.current , {
-        x:-200,
-        y:200,
-        duration:1,
-        scale:0,
-        rotate: 520,
-      })
-      return anime  
-    }
-    function level4Entrance(){
-      const anime=gsap.timeline({
-        scrollTrigger: {
-          trigger: slider.current,
-          start: "4210",
-          end: "5200",
-          scrub: 3,
-        }
-      }).fromTo(pathWay.current ,{
-        x:255,
-        y:100,
-        scale:1,
-        opacity:0,
-      },{
-        x:255,
-        y:150,
-        scale:1,
-        opacity:1
-      }).fromTo(descLevel4.current ,{
-        x:500,
-        y:100,
-        opacity:0,
-        scale:1,
-      },{
-        opacity:1,
-        x:330,
-        y:100,
-        scale:1
-      }).to(descLevel4.current , {
-        x:600,
-        opacity:0,
-      },'+=1').to(pathWay.current , {
-        opacity:0,
-      },'-=0.8')
-      .to(
-        rocket.current,{
-          rotate:90,
-          x:50,
-          y:0,
-          scale:2,
-          duration:2,
-        },'+=1'
-      )
-      .to(
-        rocket.current,{
-          x:500,
-          y:50,
-          duration:2
-        }
-      )
-      return anime
-    }
+    const earthWay= useRef(null),moonWay= useRef(null);
+    const props=useMemo(()=>({
+      descLevel1:descLevel1,
+      descLevel2:descLevel2,
+      descLevel3:descLevel3,
+      descLevel4:descLevel4,
+      pathWay:pathWay,
+      journey:journey,
+      gsap:gsap,
+      slider:slider,
+      rocket:rocket,
+      journeyLevel1:journeyLevel1,
+      journeyLevel2:journeyLevel2,
+      journeyLevel4:journeyLevel4,
+      journeyLevel3:journeyLevel3,
+      earthWay:earthWay,
+      moonWay:moonWay
+    }),[descLevel1, descLevel2, descLevel3, descLevel4, pathWay, slider, rocket, journey, journeyLevel1, journeyLevel2, journeyLevel4, journeyLevel3,earthWay])
     useLayoutEffect(() => {
         const ctx = gsap.context(() => {
           const master=gsap.timeline(
@@ -264,16 +59,18 @@ const Rocket = () => {
               end: "bottom bottom",
             }}
           );
-          master.add(setFrames());
-          master.add(intro())
-          master.add(rocketEntrance());
-          master.add(level1Entrance());
-          master.add(level2Entrance());
-          master.add(level3Entrance());
-          master.add(level4Entrance());
+          master.add(setFrames(props));
+          master.add(intro(props))
+          master.add(rocketEntrance(props))
+          master.add(level1Entrance(props))
+          master.add(level2Entrance(props))
+          master.add(level3Entrance(props))
+          master.add(level4Entrance(props))
+          master.add(planet1(props))
+          master.add(planet2(props))
         }) 
-        return () => ctx.revert();
-      },[slider])
+        return () => ctx.revert()
+      },[props])
   return (
     <div ref={slider} className="container">
       <div className="headers" ref={journey}>
@@ -281,16 +78,16 @@ const Rocket = () => {
       </div>
       <div ref={rocket} className="rocket" >
         <div className="part" ref={journeyLevel4}>
-        <img src={rocketLevel4} ref={level4FallOf} alt="rocket" className="rocket-parts"/>
+        <img src={rocketLevel4}  alt="rocket" className="rocket-parts"/>
         </div>
         <div className="part" ref={journeyLevel3}>
-          <img src={rocketLevel3} ref={level3FallOf} alt="rocket" className="rocket-parts"/>
+          <img src={rocketLevel3}  alt="rocket" className="rocket-parts"/>
         </div>
         <div className="part" ref={journeyLevel2} >
-          <img src={rocketLevel2} ref={level2FallOf} alt="rocket" className="rocket-parts"/>
+          <img src={rocketLevel2}  alt="rocket" className="rocket-parts"/>
         </div>
         <div className="part" ref={journeyLevel1}>
-          <img src={rocketLevel1} ref={level1FallOf} alt="rocket" className="rocket-parts"/>
+          <img src={rocketLevel1} alt="rocket" className="rocket-parts"/>
         </div>
       </div>
       <div style={{ position: "absolute",height:"40%" }} className="rom" ref={pathWay}>
@@ -301,6 +98,12 @@ const Rocket = () => {
       <Frame level="3" desc={desc} refer={descLevel3}/>
       <Frame level="2" desc={desc} refer={descLevel2}/>
       <Frame level="1" desc={desc} refer={descLevel1}/>
+      <div style={{ position: "absolute",height:"60%" ,}} className="rom" ref={earthWay}>
+        <img src={Earth} height={"90%"}/>
+      </div>
+      <div style={{ position: "absolute",height:"60%" ,}} className="rom" ref={moonWay}>
+        <img src={Moon} height={"90%"}/>
+      </div>
   </div>
   )
 }
