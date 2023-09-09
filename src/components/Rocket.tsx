@@ -1,6 +1,6 @@
 import  { useEffect, useRef } from 'react'
 import { layer1, layer2, layer3, layer4 } from './support'
-import { moon, earth } from './support'
+// import { moon, earth } from './support'
 import './Rocket.css'
 import Frame from './Frame'
 import gsap from 'gsap'
@@ -20,14 +20,24 @@ const Rocket = () => {
   // rocket layers ref
   const rockerLayer1=useRef(null),rockerLayer2=useRef(null),rockerLayer3=useRef(null),rockerLayer4=useRef(null)
   // description by level ref
-  const descLevel1=useRef(null),descLevel2=useRef(null),descLevel3=useRef(null),descLevel4=useRef(null)
+  const descLevel1=useRef(null)
+  // const descLevel2=useRef(null),descLevel3=useRef(null),descLevel4=useRef(null)
   // level pointer ref
   const levelPointer=useRef(null)
   // planet ref
-  const earthRef=useRef(null),moonRef=useRef(null)
+  // const earthRef=useRef(null),moonRef=useRef(null)
   useEffect(()=>{
     
     const ctx=gsap.context(()=>{
+      const mediaQuery = gsap.matchMedia()
+    mediaQuery.add({
+      isLandscape: '(orientation:landscape)',
+      isPortrait: '(orientation:portrait)',
+
+    },(context)=>{
+      const {isLandscape, isPortrait}=context.conditions
+      console.log({isLandscape, isPortrait})
+    })
       gsap.timeline({
         scrollTrigger: {
           trigger: container.current,
