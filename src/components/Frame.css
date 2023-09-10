@@ -12,10 +12,17 @@
   min-height: fit-content;
 }
 .frame .text-wrapper {
+  word-break: break-all;
   font-size: 1.25rem;
   margin-bottom: 10px;
 }
 .frame .basic-enablement {
   font-size: 14px;
+  text-align: justify;
 }
 
+@media screen and (orientation: portrait) {
+  .frame {
+    width: 50%;
+  }
+}
