@@ -1,7 +1,4 @@
-import  { useEffect, useRef,
-  
-  // useState
-} from 'react'
+import  { useEffect, useRef,useState} from 'react'
 import { layer1, layer2, layer3, layer4 } from './support'
 // import { moon, earth } from './support'
 import './Rocket.css'
@@ -15,7 +12,8 @@ import { level1Showcase } from './AnimationFunc/level1Showcase'
 gsap.registerPlugin(ScrollTrigger)
 
 const Rocket = () => { 
-
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [level, setLevel] = useState('1')
   // main container ref
   const container = useRef(null)
   // heading ref
@@ -31,6 +29,8 @@ const Rocket = () => {
   const levelPointer=useRef(null)
   // planet ref
   // const earthRef=useRef(null),moonRef=useRef(null)
+  // dummy 
+  const dummy=useRef(null)
   useEffect(()=>{
     
     const ctx=gsap.context(()=>{
@@ -56,7 +56,8 @@ const Rocket = () => {
       }
     })
     master.add(rocketEntering({rocket:rocket,levelPointer:levelPointer,...props}))
-    master.add(level1Showcase({...props,levelPointer:levelPointer,rocketLayer1:rocketLayer1,descLevel1:descLevel1}))
+    master.add(level1Showcase({...props,levelPointer:levelPointer,rocketLayer1:rocketLayer1,descLevel1:descLevel1,dummy:dummy}))
+    // master.add(level2Showcase({...props,levelPointer:levelPointer,rocketLayer1:rocketLayer2,descLevel1:descLevel1}))
     })
 
     return ()=>ctx.revert()
@@ -74,12 +75,12 @@ const Rocket = () => {
       <img src={layer2} alt="layer2" className="layer" ref={rocketLayer2} />
       <img src={layer1} alt="layer1" className="layer" ref={rocketLayer1} />
     </div>
-    <Frame level="1" refer={descLevel1} classname="levels"/>
+    <Frame level={level} refer={descLevel1} classname="levels"/>
     <svg width='30%'  viewBox="0 0 4080 748" fill="none" preserveAspectRatio='xMidYMid meet' className='levelPointer1' ref={levelPointer} style={{position:"absolute"}}>
       <path d="M39.0769 38.4617L742.923 742.308H4079.69" stroke="white" strokeWidth="10"/>
       <circle cx="25.6418" cy="25.0266" r="25" fill="white"/>
     </svg>
-    
+    <div ref={dummy} style={{position:"absolute",display:"none"}}></div>
     {/* 
     <Frame level="2" refer={descLevel2}/>
     <Frame level="3" refer={descLevel3}/>

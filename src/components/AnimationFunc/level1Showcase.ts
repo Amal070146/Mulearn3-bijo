@@ -1,8 +1,9 @@
 import MotionPathPlugin from "gsap/MotionPathPlugin"
-export function level1Showcase({gsap,rocketLayer1,levelPointer,descLevel1}){
+export function level1Showcase({gsap,rocketLayer1,levelPointer,descLevel1,dummy}){
     const timeline = gsap.timeline()
     timeline.add(setUplevelPointerLocation({gsap,rocketLayer1,levelPointer}))
     timeline.add(setUpDescriptionLevel1({gsap,descLevel1,levelPointer}))
+    timeline.add(disAppear({gsap,descLevel1,levelPointer,dummy}))
     return timeline
 }
 
@@ -50,8 +51,26 @@ function setUpDescriptionLevel1({gsap,descLevel1,levelPointer}){
         }).to(descLevel1.current,{
             opacity:1,  
         })
-        
     })
     
     return timeline
 }
+function disAppear({gsap,descLevel1,levelPointer,dummy}){
+    const timeline = gsap.timeline()
+    const play={
+        opacity:0,
+        x:'+=100',
+    }
+    timeline.from(dummy.current,{opacity:0})
+    timeline.to(dummy.current,play)
+    .to(dummy.current,play)
+    .to(descLevel1.current,play)
+    .to(levelPointer.current,play)
+    return timeline
+}
+// function breakOut({gsap,rocketLayer1}){
+//     const timeline = gsap.timeline()
+//     timeline.fromTo(rocketLayer1.current,{
+        
+//     })
+// }
