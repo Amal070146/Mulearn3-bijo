@@ -62,7 +62,7 @@ const Rocket = () => {
     })
     master.add(rocketEntering({rocket:rocket,levelPointer:levelPointer,...props}))
     master.add(level1Showcase({...props,levelPointer:levelPointer,rocketLayer1:rocketLayer1,descLevel1:descLevel1,dummy:dummy}))
-    master.add(level2Showcase({...props,levelPointer:levelPointer,rocketLayer2:rocketLayer2,descLevel2:descLevel1,dummy:dummy,setLevel:setLevel}))
+    master.add(level2Showcase({...props,levelPointer:levelPointer,rocketLayer2:rocketLayer2,descLevel2:descLevel1,dummy:dummy,setLevel:setLevel,rocket:rocket}))
     
     })
 
