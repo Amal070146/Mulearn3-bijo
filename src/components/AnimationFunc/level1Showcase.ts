@@ -4,6 +4,7 @@ export function level1Showcase({gsap,rocketLayer1,levelPointer,descLevel1,dummy}
     timeline.add(setUplevelPointerLocation({gsap,rocketLayer1,levelPointer}))
     timeline.add(setUpDescriptionLevel1({gsap,descLevel1,levelPointer}))
     timeline.add(disAppear({gsap,descLevel1,levelPointer,dummy}))
+    timeline.add(breakOut({gsap,rocketLayer1}))
     return timeline
 }
 
@@ -65,12 +66,22 @@ function disAppear({gsap,descLevel1,levelPointer,dummy}){
     timeline.to(dummy.current,play)
     .to(dummy.current,play)
     .to(descLevel1.current,play)
-    .to(levelPointer.current,play)
+    .to(levelPointer.current,{...play,x:'+=0'})
     return timeline
 }
-// function breakOut({gsap,rocketLayer1}){
-//     const timeline = gsap.timeline()
-//     timeline.fromTo(rocketLayer1.current,{
-        
-//     })
-// }
+function breakOut({gsap,rocketLayer1}){
+    const timeline = gsap.timeline()
+    timeline.to(rocketLayer1.current,{
+        keyframes:[
+            { scale:0.8 },
+            {scale:0.6 },
+            {scale:0.4 },
+            {scale:0.2 },
+            {scale:0.1 },
+            {scale:0 },
+        ],
+        x:`-=100`,
+        rotate:360
+    })
+    return timeline
+}

@@ -7,9 +7,11 @@ import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { rocketEntering } from './AnimationFunc/rocketEntering'
 import { level1Showcase } from './AnimationFunc/level1Showcase'
+import { level2Showcase } from './AnimationFunc/level2Showcase'
+import { MotionPathPlugin } from 'gsap/all'
 
 
-gsap.registerPlugin(ScrollTrigger)
+gsap.registerPlugin(ScrollTrigger,MotionPathPlugin)
 
 const Rocket = () => { 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -46,10 +48,13 @@ const Rocket = () => {
     // })
     const props={gsap:gsap}
     const master=gsap.timeline({
+      // onUpdate:()=>{
+      //   console.log(MotionPathPlugin.getRelativePosition(rocketLayer2.current,levelPointer.current,[0,0],[0.5,0]))
+      // },
       scrollTrigger: {
         trigger: container.current,
         start: "top top",
-        end: "bottom top",
+        end: "bottom+=3000 top",
         markers: true,
         scrub: 1,
         pin: true,
@@ -57,7 +62,8 @@ const Rocket = () => {
     })
     master.add(rocketEntering({rocket:rocket,levelPointer:levelPointer,...props}))
     master.add(level1Showcase({...props,levelPointer:levelPointer,rocketLayer1:rocketLayer1,descLevel1:descLevel1,dummy:dummy}))
-    // master.add(level2Showcase({...props,levelPointer:levelPointer,rocketLayer1:rocketLayer2,descLevel1:descLevel1}))
+    master.add(level2Showcase({...props,levelPointer:levelPointer,rocketLayer2:rocketLayer2,descLevel2:descLevel1,dummy:dummy,setLevel:setLevel}))
+    
     })
 
     return ()=>ctx.revert()
