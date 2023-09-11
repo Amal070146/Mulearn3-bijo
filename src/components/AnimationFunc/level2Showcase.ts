@@ -14,7 +14,7 @@ function enlargeRocket({gsap,rocket}){
     const timeline = gsap.timeline()
     timeline.to(rocket.current,{
         scale:'+=0.5',
-        y:'+=50'
+        y:'+=100'
     })
     return timeline
 }
