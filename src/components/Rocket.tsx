@@ -9,6 +9,8 @@ import { rocketEntering } from './AnimationFunc/rocketEntering'
 import { level1Showcase } from './AnimationFunc/level1Showcase'
 import { level2Showcase } from './AnimationFunc/level2Showcase'
 import { MotionPathPlugin } from 'gsap/all'
+import { level3Showcase } from './AnimationFunc/level3Showcase'
+import { level4Showcase } from './AnimationFunc/level4Showcase'
 
 
 gsap.registerPlugin(ScrollTrigger,MotionPathPlugin)
@@ -46,24 +48,29 @@ const Rocket = () => {
     //   console.log({isLandscape, isPortrait})
      
     // })
-    const props={gsap:gsap}
+    const props={
+      gsap:gsap,
+      levelPointer:levelPointer,
+      dummy:dummy,
+      setLevel:setLevel,
+      rocket:rocket
+    }
     const master=gsap.timeline({
-      // onUpdate:()=>{
-      //   console.log(MotionPathPlugin.getRelativePosition(rocketLayer2.current,levelPointer.current,[0,0],[0.5,0]))
-      // },
       scrollTrigger: {
         trigger: container.current,
         start: "top top",
-        end: "bottom+=3000 top",
+        end: "bottom+=3500 top",
         markers: true,
         scrub: 1,
         pin: true,
       }
     })
-    master.add(rocketEntering({rocket:rocket,levelPointer:levelPointer,...props}))
-    master.add(level1Showcase({...props,levelPointer:levelPointer,rocketLayer1:rocketLayer1,descLevel1:descLevel1,dummy:dummy}))
-    master.add(level2Showcase({...props,levelPointer:levelPointer,rocketLayer2:rocketLayer2,descLevel2:descLevel1,dummy:dummy,setLevel:setLevel}))
-    
+    master.add(rocketEntering({rocket:rocket,...props}))
+    master.add(level1Showcase({...props,rocketLayer1:rocketLayer1,descLevel1:descLevel1}))
+    master.add(level2Showcase({...props,rocketLayer2:rocketLayer2,descLevel2:descLevel1}))
+    master.add(level3Showcase({...props,rocketLayer:rocketLayer3,description:descLevel1}))  
+    master.add(level4Showcase({...props,description:descLevel1}),)  
+
     })
 
     return ()=>ctx.revert()

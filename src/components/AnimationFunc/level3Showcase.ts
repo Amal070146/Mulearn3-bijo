@@ -1,26 +1,24 @@
-export function level2Showcase({gsap,rocketLayer2,levelPointer,descLevel2,dummy,setLevel}){
+export function level3Showcase({gsap,rocketLayer,levelPointer,description,dummy,setLevel}){
     const mediaQuery = gsap.matchMedia()
 
     const timeline = gsap.timeline({
-        onStart:()=>{
-            setLevel('2')
-        },
+        onStart:()=>{setLevel('3')},
         onReverseComplete:()=>{
-            setLevel('1') 
+            setLevel('2')
             mediaQuery.add({
                 isLandscape: '(orientation:landscape)',
                 isPortrait: '(orientation:portrait)',
             },(context)=>{
                 const {isPortrait }=context.conditions
-            gsap.set(descLevel2.current,{ y:isPortrait?'-=100':'-=100'})
-        })
-        },
+        gsap.set(description.current,{ y:isPortrait?'-=100':'-=200'})
+    })
+    },
     })
     
     timeline.add(setUplevelPointerLocation({gsap,levelPointer}))
-    timeline.add(setUpDescriptionLevel1({gsap,descLevel2}))
-    timeline.add(disAppear({gsap,descLevel2,levelPointer,dummy}))
-    timeline.add(breakOut({gsap,rocketLayer2}))
+    timeline.add(setUpDescriptionLevel1({gsap,description}))
+    timeline.add(disAppear({gsap,description,levelPointer,dummy}))
+    timeline.add(breakOut({gsap,rocketLayer}))
     return timeline
 }
 
@@ -30,14 +28,15 @@ function setUplevelPointerLocation({gsap,levelPointer}){
         opacity:0,
     },{
         opacity:0,
-        y:'-=75'
+        x:'-=100',
+        y:'-=100'
     }).to(levelPointer.current,{
         opacity:1,
     })
     return timeline
 }
 
-function setUpDescriptionLevel1({gsap,descLevel2}){
+function setUpDescriptionLevel1({gsap,description}){
     const timeline = gsap.timeline()
     const mediaQuery = gsap.matchMedia()
     mediaQuery.add({
@@ -45,15 +44,15 @@ function setUpDescriptionLevel1({gsap,descLevel2}){
         isPortrait: '(orientation:portrait)',
     },(context)=>{
         const {isLandscape}=context.conditions
-        timeline.fromTo(descLevel2.current,{
+        timeline.fromTo(description.current,{
             opacity:0,
-            x:isLandscape?'-=50':'+=0',
             transform:isLandscape?'translate(0%, 0%)':'translate(50%, -100%)'
         },{
             opacity:0,
+            x:isLandscape?'-=50':'+=0',
+            y:isLandscape?'-=275':'-=170',
             transform:isLandscape?'translate(0%, 0%)':'translate(50%, -150%)',
-            y:isLandscape?'-=250':'+=0',
-        }).to(descLevel2.current,{
+        }).to(description.current,{
             opacity:1,  
         })
     })
@@ -61,7 +60,7 @@ function setUpDescriptionLevel1({gsap,descLevel2}){
     return timeline
 }
 
-function disAppear({gsap,descLevel2,levelPointer,dummy}){
+function disAppear({gsap,description,levelPointer,dummy}){
     const timeline = gsap.timeline()
     const play={
         opacity:0,
@@ -70,14 +69,13 @@ function disAppear({gsap,descLevel2,levelPointer,dummy}){
     timeline.from(dummy.current,{opacity:0})
     timeline.to(dummy.current,play)
     .to(dummy.current,play)
-    .to(dummy.current,play)
-    .to(descLevel2.current,play)
+    .to(description.current,play)
     .to(levelPointer.current,play)
     return timeline
 }
-function breakOut({gsap,rocketLayer2}){
+function breakOut({gsap,rocketLayer}){
     const timeline = gsap.timeline()
-    timeline.to(rocketLayer2.current,{
+    timeline.to(rocketLayer.current,{
         keyframes:[
             { scale:0.8 },
             {scale:0.6 },
