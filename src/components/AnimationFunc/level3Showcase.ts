@@ -1,7 +1,7 @@
-export function level2Showcase({gsap,rocketLayer,levelPointer,descLevel,dummy,setLevel,rocket}){
+export function level3Showcase({gsap,rocketLayer,levelPointer,descLevel,dummy,setLevel,rocket}){
     const timeline = gsap.timeline({
-        onStart:()=>{setLevel('2')},
-        onReverseComplete:()=>{setLevel('1') },
+        onStart:()=>{setLevel('3')},
+        onReverseComplete:()=>{setLevel('2') },
     })
     timeline.add(enlargeRocket({gsap,rocket}))
     timeline.add(setUplevelPointerLocation({gsap,levelPointer}))
@@ -14,7 +14,7 @@ function enlargeRocket({gsap,rocket}){
     const timeline = gsap.timeline()
     timeline.to(rocket.current,{
         scale:'+=0.5',
-        y:'+=100'
+        y:'+=150'
     })
     return timeline
 }
@@ -22,6 +22,7 @@ function setUplevelPointerLocation({gsap,levelPointer}){
     const timeline = gsap.timeline()
     timeline.to(levelPointer.current,{
         opacity:1,
+        x:'-=100',
     })
     return timeline
 }
