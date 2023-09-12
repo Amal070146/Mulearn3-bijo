@@ -1,6 +1,6 @@
 import  { useEffect, useRef,useState} from 'react'
 import { layer1, layer2, layer3, layer4 } from './support'
-// import { moon, earth } from './support'
+import { moon, earth } from './support'
 import './Rocket.css'
 import Frame from './Frame'
 import gsap from 'gsap'
@@ -11,6 +11,7 @@ import { level2Showcase } from './AnimationFunc/level2Showcase'
 import { MotionPathPlugin } from 'gsap/all'
 import { level3Showcase } from './AnimationFunc/level3Showcase'
 import { level4Showcase } from './AnimationFunc/level4Showcase'
+import { planetEntering } from './AnimationFunc/planetEntering'
 
 
 gsap.registerPlugin(ScrollTrigger,MotionPathPlugin)
@@ -32,46 +33,38 @@ const Rocket = () => {
   // level pointer ref
   const levelPointer=useRef(null)
   // planet ref
-  // const earthRef=useRef(null),moonRef=useRef(null)
-  // dummy 
+  const earthRef=useRef(null),moonRef=useRef(null)
+  // dummy  ref
   const dummy=useRef(null)
   useEffect(()=>{
+    const rocketParts=[rocketLayer1,rocketLayer2,rocketLayer3]
     
     const ctx=gsap.context(()=>{
-    //   const mediaQuery = gsap.matchMedia()
-    // mediaQuery.add({
-    //   isLandscape: '(orientation:landscape)',
-    //   isPortrait: '(orientation:portrait)',
 
-    // },(context)=>{
-    //   const {isLandscape, isPortrait}=context.conditions
-    //   console.log({isLandscape, isPortrait})
-     
-    // })
-    const props={gsap:gsap}
+    const props={
+      levelPointer:levelPointer,
+      rocket:rocket,
+    }
     const master=gsap.timeline({
-      // onUpdate:()=>{
-      //   console.log(MotionPathPlugin.getRelativePosition(rocketLayer2.current,levelPointer.current,[0,0],[0.5,0]))
-      // },
       scrollTrigger: {
         trigger: container.current,
         start: "top top",
-        end: "bottom+=6000 top",
-        markers: true,
+        end: "bottom+=5000 top",
         scrub: 1,
         pin: true,
+        fastScrollEnd: true
       }
     })
-    master.add(rocketEntering({rocket:rocket,levelPointer:levelPointer,...props}))
-    .add(level1Showcase({...props,levelPointer:levelPointer,rocketLayer1:rocketLayer1,descLevel1:descLevel1,dummy:dummy}))
-    .add(level2Showcase({...props,levelPointer:levelPointer,rocketLayer:rocketLayer2,descLevel:descLevel1,dummy:dummy,setLevel:setLevel,rocket:rocket}))
-    .add(level3Showcase({...props,levelPointer:levelPointer,rocketLayer:rocketLayer3,descLevel:descLevel1,dummy:dummy,setLevel:setLevel,rocket:rocket}))
-    .add(level4Showcase({...props,levelPointer:levelPointer,descLevel:descLevel1,dummy:dummy,setLevel:setLevel,rocket:rocket}))
-  
+    master.add(rocketEntering(props))
+    .add(level1Showcase({...props,rocketLayer1:rocketLayer1,descLevel1:descLevel1,dummy:dummy}))
+    .add(level2Showcase({...props,rocketLayer:rocketLayer2,descLevel:descLevel1,dummy:dummy,setLevel:setLevel}),'-=0.5' )
+    .add(level3Showcase({...props,rocketLayer:rocketLayer3,descLevel:descLevel1,dummy:dummy,setLevel:setLevel}),'-=0.5')
+    .add(level4Showcase({...props,descLevel:descLevel1,dummy:dummy,setLevel:setLevel,rocketLayer:rocketLayer4}),'-=0.5')
+    .add(planetEntering({...props,earthRef:earthRef,rocketParts:rocketParts}))
   })
 
     return ()=>ctx.revert()
-  },[])
+  },[rocketLayer1,rocketLayer2,rocketLayer3])
 
   // return value
   return (
@@ -91,12 +84,9 @@ const Rocket = () => {
       <circle cx="25.6418" cy="25.0266" r="25" fill="white"/>
     </svg>
     <div ref={dummy} style={{position:"absolute",display:"none"}}></div>
-    {/* 
-    <Frame level="2" refer={descLevel2}/>
-    <Frame level="3" refer={descLevel3}/>
-    <Frame level="4" refer={descLevel4}/>
+    
     <img src={moon} alt="moon" className="moon planet" ref={moonRef}/>
-    <img src={earth} alt="earth" className="earth planet" ref={earthRef}/> */}
+    <img src={earth} alt="earth" className="earth planet" ref={earthRef}/> 
   </div>
   )
 }

@@ -1,4 +1,6 @@
-export function rocketEntering({ gsap,rocket ,levelPointer}) {
+import gsap from 'gsap'
+
+export function rocketEntering({ rocket ,levelPointer}) {
     const timeline = gsap.timeline()
     const mediaQuery = gsap.matchMedia()
     if (rocket.current){

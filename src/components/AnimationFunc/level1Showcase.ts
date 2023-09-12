@@ -1,34 +1,22 @@
-import MotionPathPlugin from "gsap/MotionPathPlugin"
-export function level1Showcase({gsap,rocketLayer1,levelPointer,descLevel1,dummy}){
+import { breakOut } from "./breakOut"
+import { removeDescription } from "./disappear"
+import { setUplevelPointerLocation, showLevelPointer } from "./levelPointerAnimations"
+import gsap from 'gsap'
+
+// import MotionPathPlugin from "gsap/MotionPathPlugin"
+export function level1Showcase({rocketLayer1,levelPointer,descLevel1,dummy}){
     const timeline = gsap.timeline({
         
     })
-    timeline.add(setUplevelPointerLocation({gsap,rocketLayer1,levelPointer}))
-    timeline.add(setUpDescriptionLevel1({gsap,descLevel1}))
-    timeline.add(disAppear({gsap,descLevel1,levelPointer,dummy}))
-    timeline.add(breakOut({gsap,rocketLayer1}))
+    timeline.add(setUplevelPointerLocation({levelPointer,rocketLayer:rocketLayer1}))
+    timeline.add(showLevelPointer({levelPointer}))
+    timeline.add(setUpDescriptionLevel1({descLevel1}))
+    timeline.add(removeDescription(descLevel1,levelPointer,dummy))
+    timeline.add(breakOut(rocketLayer1))
     return timeline
 }
 
-function setUplevelPointerLocation({gsap,rocketLayer1,levelPointer}){
-    const timeline = gsap.timeline()
-    timeline.fromTo(levelPointer.current,{
-        opacity:0,
-    },{
-        opacity:0,
-        x:()=>{
-            return MotionPathPlugin.getRelativePosition(levelPointer.current,rocketLayer1.current,[0,0],[0.5,0.5]).x
-        },
-        y:()=>{
-            return MotionPathPlugin.getRelativePosition(levelPointer.current,rocketLayer1.current,[0,0],[0.5,0.5]).y
-        },
-     }).to(levelPointer.current,{
-         opacity:1,
-     })
-
-    return timeline
-}
-function setUpDescriptionLevel1({gsap,descLevel1}){
+function setUpDescriptionLevel1({descLevel1}){
     const timeline = gsap.timeline()
     const mediaQuery = gsap.matchMedia()
     mediaQuery.add({
@@ -49,34 +37,5 @@ function setUpDescriptionLevel1({gsap,descLevel1}){
         })
     })
     
-    return timeline
-}
-function disAppear({gsap,descLevel1,levelPointer,dummy}){
-    const timeline = gsap.timeline()
-    const play={
-        opacity:0,
-        x:'+=100',
-    }
-    timeline.from(dummy.current,{opacity:0})
-    timeline.to(dummy.current,play)
-    .to(dummy.current,play)
-    .to(descLevel1.current,play)
-    .to(levelPointer.current,{...play,x:'+=0'})
-    return timeline
-}
-function breakOut({gsap,rocketLayer1}){
-    const timeline = gsap.timeline()
-    timeline.to(rocketLayer1.current,{
-        keyframes:[
-            { scale:0.8 },
-            {scale:0.6 },
-            {scale:0.4 },
-            {scale:0.2 },
-            {scale:0.1 },
-            {scale:0 },
-        ],
-        x:`-=100`,
-        rotate:360
-    })
     return timeline
 }

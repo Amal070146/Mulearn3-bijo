@@ -44,7 +44,13 @@
   line-height: 86.4px;
   white-space: nowrap;
 }
-
+.planet{
+  position: absolute;
+  aspect-ratio: 1;
+  top:50%;
+  
+  
+}
 @media screen and (orientation: landscape) {
   .rocket {
     top: 55%;
@@ -60,8 +66,16 @@
     left: 33%;
     transform: translate(20%, -50%);
   }
+  .planet{
+    height: 50%;
+    transform: translate(100%,-50% );
+  }
 }
 @media screen and (orientation: portrait) {
+  .planet{
+    width: 50%;
+    transform: translate(0%,-50%);
+  }
   .rocket {
     left: -40%;
     top: 50%;
@@ -76,4 +90,8 @@
     left: 16%;
     transform: translate(20%, -50%);
   }
+}
+
+.moon{
+  display: none;
 }
