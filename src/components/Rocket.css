@@ -48,8 +48,7 @@
   position: absolute;
   aspect-ratio: 1;
   top:50%;
-  
-  
+  scale:0;
 }
 @media screen and (orientation: landscape) {
   .rocket {
@@ -67,8 +66,10 @@
     transform: translate(20%, -50%);
   }
   .planet{
+    overflow: hidden;
     height: 50%;
     transform: translate(100%,-50% );
+    
   }
 }
 @media screen and (orientation: portrait) {

@@ -21,23 +21,9 @@ export function level4Showcase({levelPointer,descLevel,dummy,setLevel,rocket,roc
 
 
 function setUpDescriptionLevel1({descLevel}){
-    const mediaQuery = gsap.matchMedia()
     const timeline = gsap.timeline()
 
     timeline.to(descLevel.current,{
-        opacity:0,
-        x:'-=100',
-        y:()=>{
-            mediaQuery.add({
-                isLandscape: '(orientation:landscape)',
-                isPortrait: '(orientation:portrait)',
-            },(context)=>{
-                const {isLandscape}=context.conditions
-                return isLandscape?'+=50':'+=0'
-            })
-            return '+=50'
-        },
-    }).to(descLevel.current,{
         opacity:1,  
     })
     
