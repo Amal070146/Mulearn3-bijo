@@ -1,4 +1,3 @@
-import React from 'react'
 
 const Earth = ({refer,className,lineRef,circleRef}) => {
   return (

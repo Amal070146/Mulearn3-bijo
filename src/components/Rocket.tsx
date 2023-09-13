@@ -86,7 +86,9 @@ const Rocket = () => {
     <div ref={dummy} style={{position:"absolute",display:"none"}}></div>
     
     <img src={moon} alt="moon" className="moon planet" ref={moonRef}/>
+    
     <img src={earth} alt="earth" className="earth planet" ref={earthRef}/> 
+
   </div>
   )
 }

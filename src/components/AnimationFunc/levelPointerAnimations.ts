@@ -22,7 +22,7 @@ export function showLevelPointer({levelPointer}){
 }
 
 export function setupPointerLocation(timeline: { set: (arg0: Element, arg1: { x: string; y: string; }) => void },levelPointer: { current: Element },rocketLayer: { current: Element }){
-    const p=MotionPathPlugin.getRelativePosition(levelPointer.current,rocketLayer.current,[0,0],[0.5,0.75])
+    const p=MotionPathPlugin.getRelativePosition(levelPointer.current,rocketLayer.current,[0,0],[0.5,0.5])
     timeline.set(
         levelPointer.current,
         {
