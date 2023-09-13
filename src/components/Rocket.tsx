@@ -1,4 +1,4 @@
-import  { useEffect, useRef,useState} from 'react'
+import  { useEffect, useLayoutEffect, useRef,useState} from 'react'
 import { layer1, layer2, layer3, layer4 } from './support'
 import { moon, earth } from './support'
 import './Rocket.css'
@@ -36,7 +36,7 @@ const Rocket = () => {
   const earthRef=useRef(null),moonRef=useRef(null)
   // dummy  ref
   const dummy=useRef(null)
-  useEffect(()=>{
+  useLayoutEffect(()=>{
     const rocketParts=[rocketLayer1,rocketLayer2,rocketLayer3]
     
     const ctx=gsap.context(()=>{
