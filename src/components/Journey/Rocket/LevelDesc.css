@@ -1,0 +1,41 @@
+.list-levelDesc-container{
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 50%;
+    align-items: center;
+    padding: 10px;
+    overflow: visible;
+}
+
+.levelDesc-container{
+    height: fit-content ;
+    width: 100%;
+    position: relative;
+    
+}
+.pointer{
+    position: absolute;
+    width: 50%;
+    top: 50%;
+    left: -50%;
+    padding-right: 10px;
+}
+.levelDesc-container h3{
+    text-align: left;
+    font-weight: 400;
+    font-size: 28px;
+    padding-bottom: 20px;
+}
+.levelDesc-container h4,p{
+    text-align: left;
+    font-size: 15px;
+    font-weight: 400;
+    padding-bottom: 5px;
+}
+.levelDesc-container p{
+    text-align: justify;
+    word-wrap: break-word;
+    font-size: 13px;
+}

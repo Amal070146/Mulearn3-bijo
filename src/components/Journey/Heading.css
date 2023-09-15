@@ -1,0 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700&display=swap');
+  .header-text {
+    padding: 20px;
+    flex-shrink: 0;
+    text-align: center;
+    text-shadow: 0px 1px 0px hsla(0, 0%, 0%, 0.07);
+    background: rgb(255,255,255);
+    background: -moz-linear-gradient(0deg, rgba(255,255,255,0) 15%, rgba(255,255,255,1) 50%);
+    background: -webkit-linear-gradient(0deg, rgba(255,255,255,0) 15%, rgba(255,255,255,1) 50%);
+    background: linear-gradient(0deg, rgba(255,255,255,0) 15%, rgba(255,255,255,1) 50%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#ffffff",endColorstr="#ffffff",GradientType=1);
+    -webkit-background-clip: text !important;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 700;
+    color: transparent;
+    font-size: clamp(1vh, 10vw, 50px);
+    text-align: center;
+    overflow: visible;
+  }
