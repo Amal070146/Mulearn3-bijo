@@ -6,11 +6,14 @@ import pointer from '../../../assets/pointer.svg'
 import './Rocket.css'
 import './LevelDesc.css'
 import { levels } from './LevelData'
-import { useEffect, useLayoutEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import gsap from 'gsap'
-import { ScrollTrigger } from 'gsap/all'
+import { ScrollTrigger ,MotionPathPlugin} from 'gsap/all'
 import { timeline } from '../utils/timeline'
-gsap.registerPlugin(ScrollTrigger)
+
+
+// import { timeline } from '../utils/timeline'
+gsap.registerPlugin(ScrollTrigger,MotionPathPlugin)
 
 const Rocket = () => {
     return (
@@ -31,14 +34,36 @@ export const LevelDescriptions=()=>{
     useEffect(()=>{
         setH(rocketHeight)
     },[rocketHeight])
-    useLayoutEffect(() => {
-        const ctx=gsap.context(()=>timeline(setLevel))
-        return ()=>ctx.revert()
+    useEffect(() => {
+        const ctx=gsap.context(()=>{
+            const tl=gsap.timeline({
+                scrollTrigger: {
+                    trigger: document.querySelector('.Journey'),    
+                    start: 'top top',
+                    end: 'bottom top',
+                    markers: true,
+                    pin: true,
+                    scrub: true,
+                }
+        })
+        gsap.from('#journey-header', {
+            scrollTrigger: {
+                trigger: document.querySelector('.Journey'),    
+                start: 'top bottom',
+                end: 'top top',
+                scrub: true,
+            },
+            yPercent: -250
+        })
+        tl.add(timeline({setLevel}))
     })
+    return ()=>ctx.revert()
+
+    },[])
     return(
         <div className='list-levelDesc-container' style={{height: h}}>
             <div key={levelDetails.id} className='levelDesc-container'>
-                <img src={pointer} className='pointer'/>
+                <img src={pointer} className='pointer '/>
                     <h3>{levelDetails.title}</h3>
                     <div className='levelDesc-container-sub'>
                         <h4>{levelDetails.heading}</h4>

@@ -25,7 +25,7 @@ const JourneyBody = () => {
     return(
         <div className='journeyBodyContainer'>
             <div className='journeyBody'>
-                <img src={Earth} alt="Earth" className='earth'/>
+                <img src={Earth} alt="Earth" className='earth' style={{display: 'none'}}/>
                 <Rocket/>
                 <LevelDescriptions/>
             </div>
