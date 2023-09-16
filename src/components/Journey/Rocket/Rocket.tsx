@@ -29,8 +29,6 @@ const Rocket = () => {
 export const LevelDescriptions=()=>{
     const [h,setH]=useState(0)
     const rocketHeight = document.getElementById('rocket')?.offsetHeight;
-    const [level]=useState(1)
-    const levelDetails=levels[1]
     useEffect(()=>{
         setH(rocketHeight)
     },[rocketHeight])
@@ -62,14 +60,16 @@ export const LevelDescriptions=()=>{
     },[])
     return(
         <div className='list-levelDesc-container' style={{height: h}}>
-            <div key={levelDetails.id} className='levelDesc-container'>
-                <img src={pointer} className='pointer '/>
-                    <h3>{levelDetails.title}</h3>
+            {levels.map((leveled)=>(
+            <div key={leveled.id} className={`levelDesc-container`} id={`levelDesc${leveled.level}`}>
+                <img src={pointer} className='pointer' id={`levelDesc${leveled.level}0`}/>
+                    <h3>{`Level ${leveled.level}`}</h3>
                     <div className='levelDesc-container-sub'>
-                        <h4>{levelDetails.heading}</h4>
-                        <p>{levelDetails.description}</p>
+                        <h4>{leveled.heading}</h4>
+                        <p>{leveled.description}</p>
                     </div>
-                </div>
+            </div>
+            ))}
         </div>
     )
 }

@@ -2,7 +2,7 @@
     color: white;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    /* justify-content: space-between; */
     width: 50%;
     align-items: center;
     padding: 10px;
@@ -15,6 +15,11 @@
     position: relative;
     overflow: visible;   
 }
+#levelDesc2,#levelDesc3,#levelDesc4{
+    opacity: 0;
+}
+
+
 .pointer{
     position: absolute;
     width: 50%;
