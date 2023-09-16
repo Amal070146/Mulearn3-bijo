@@ -1,6 +1,6 @@
 import gsap from 'gsap'
 import {MotionPathPlugin} from 'gsap/all'
-export const timeline=({setLevel})=>{
+export const timeline=()=>{
     const tl=gsap.timeline()
     tl.add(a())
     .add(b())

@@ -40,16 +40,16 @@ const JourneyBody = () => {
                     scrub: true,
                 }
         })
-        // gsap.from('#journey-header', {
-        //     scrollTrigger: {
-        //         trigger: document.querySelector('.Journey'),    
-        //         start: 'top bottom',
-        //         end: 'top top',
-        //         scrub: true,
-        //     },
-        //     yPercent: -250
-        // })
-        tl.add(timeline({setLevel}))
+        gsap.from('#journey-header', {
+            scrollTrigger: {
+                trigger: document.querySelector('.Journey'),    
+                start: 'top bottom',
+                end: 'top top',
+                scrub: true,
+            },
+            yPercent: -250
+        })
+        tl.add(timeline())
     })
     return ()=>ctx.revert()
 
