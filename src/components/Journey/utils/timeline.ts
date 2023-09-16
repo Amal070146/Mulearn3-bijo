@@ -4,6 +4,7 @@ import { levelAnimate } from './levelAnimate'
 // import { level3 } from './level3'
 // import { level4 } from './level4'
 import { DivElement, DivElementArray, ImageElement, ImageElementArray } from './types'
+import Rocket from '../Rocket/Rocket'
 
 
 export type TimelineProps={
@@ -23,7 +24,7 @@ export const timeline=({Rocket,Earth,RocketLayer,LevelDesc}:TimelineProps)=>{
     .add(levelAnimate({RocketLayer:RocketLayer[2],LevelDesc:LevelDesc[2]}))
     .add(breakOff(RocketLayer[2]))
     .add(levelAnimate({RocketLayer:RocketLayer[3],LevelDesc:LevelDesc[3]}))
-    .add(planetEntry(Earth))
+    .add(planetEntry(Earth,Rocket))
     return tl
 }
 
@@ -42,13 +43,17 @@ function breakOff(RocketLayer:ImageElement){
         x:'-=50',
     })
 }
-function planetEntry(Earth:DivElement){
+function planetEntry(Earth:DivElement,Rocket:DivElement){
     const tl=gsap.timeline()
+    tl.to(Rocket.current,{
+        rotate:-30
+    })
     tl.from(Earth.current, {
         yPercent: -50,
-        xPercent: 50,
+        xPercent: -50,
         scale:0,
         rotate:-360
-    })
+    },'-=0.5')
+    
     return tl
 }
