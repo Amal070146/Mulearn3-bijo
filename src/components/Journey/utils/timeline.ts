@@ -23,8 +23,6 @@ export const timeline=({Rocket,Earth,RocketLayer,LevelDesc}:TimelineProps)=>{
     .add(levelAnimate({RocketLayer:RocketLayer[2],LevelDesc:LevelDesc[2]}))
     .add(breakOff(RocketLayer[2]))
     .add(levelAnimate({RocketLayer:RocketLayer[3],LevelDesc:LevelDesc[3]}))
-    // .add(level3({RocketLayer:RocketLayer[2],LevelDesc:LevelDesc[2]}))
-    // .add(level4({RocketLayer:RocketLayer[3],LevelDesc:LevelDesc[3]}))
     .add(planetEntry(Earth))
     return tl
 }
@@ -47,7 +45,10 @@ function breakOff(RocketLayer:ImageElement){
 function planetEntry(Earth:DivElement){
     const tl=gsap.timeline()
     tl.from(Earth.current, {
-        yPercent: 150
+        yPercent: -50,
+        xPercent: 50,
+        scale:0,
+        rotate:-360
     })
     return tl
 }

@@ -3,7 +3,7 @@
     width: 90%;
     height: 90%;
     position: absolute;
-    overflow: hidden;
+    overflow: visible;
 }
 .journeyBodyContainer{
     display: flex;
