@@ -3,68 +3,45 @@ import level3 from '../../../assets/level3.png'
 import level2 from '../../../assets/level2.png'
 import level1 from '../../../assets/level1.png'
 import pointer from '../../../assets/pointer.svg'
-import './Rocket.css'
-import './LevelDesc.css'
+import RStyle from './Rocket.module.css'
+import LStyle from './LevelDesc.module.css'
 import { levels } from './LevelData'
-import { useEffect, useState } from 'react'
-import gsap from 'gsap'
-import { ScrollTrigger ,MotionPathPlugin} from 'gsap/all'
-import { timeline } from '../utils/timeline'
+import { FC, useEffect, useState } from 'react'
+import { DivElement, DivElementArray, ImageElementArray } from '../utils/types'
 
-
-// import { timeline } from '../utils/timeline'
-gsap.registerPlugin(ScrollTrigger,MotionPathPlugin)
-
-const Rocket = () => {
+interface RocketProps {
+    rocket:DivElement
+    RocketLayer:ImageElementArray
+}
+const Rocket = ({rocket,RocketLayer}:RocketProps) => {
+    const [RocketLayer1,RocketLayer2,RocketLayer3,RocketLayer4]=RocketLayer
     return (
-    <div className='rocket' id='rocket'>
-        <img src={level4} alt="Rocket Level 4" id='rocketLayer4' className='rocketLayer' />
-        <img src={level3} alt="Rocket Level 3" id='rocketLayer3' className='rocketLayer ' />
-        <img src={level2} alt="Rocket Level 2" id='rocketLayer2' className='rocketLayer '  />
-        <img src={level1} alt="Rocket Level 1" id='rocketLayer1' className='rocketLayer ' />
+    <div className={RStyle.rocket} id='rocket' ref={rocket}>
+        <img src={level4} alt="Rocket Level 4" className={RStyle.rocketLayer} ref={RocketLayer4}/>
+        <img src={level3} alt="Rocket Level 3" className={RStyle.rocketLayer} ref={RocketLayer3}/>
+        <img src={level2} alt="Rocket Level 2" className={RStyle.rocketLayer} ref={RocketLayer2}/>
+        <img src={level1} alt="Rocket Level 1" className={RStyle.rocketLayer} ref={RocketLayer1} />
     </div>
     )
 }
+interface LevelDescProps {
+    LevelDesc:DivElementArray
+    Rocket:DivElement
+}
 
-export const LevelDescriptions=()=>{
+export const LevelDescriptions:FC<LevelDescProps>=({LevelDesc,Rocket})=>{
     const [h,setH]=useState(0)
-    const rocketHeight = document.getElementById('rocket')?.offsetHeight;
+    const rocketHeight = Rocket.current?.offsetHeight;
     useEffect(()=>{
-        setH(rocketHeight)
+        setH(rocketHeight as number)
     },[rocketHeight])
-    useEffect(() => {
-        const ctx=gsap.context(()=>{
-            const tl=gsap.timeline({
-                scrollTrigger: {
-                    trigger: document.querySelector('.Journey'),    
-                    start: 'top top',
-                    end: 'bottom+=3000 top',
-                    markers: true,
-                    pin: true,
-                    scrub: true,
-                }
-        })
-        gsap.from('#journey-header', {
-            scrollTrigger: {
-                trigger: document.querySelector('.Journey'),    
-                start: 'top bottom',
-                end: 'top top',
-                scrub: true,
-            },
-            yPercent: -250
-        })
-        tl.add(timeline())
-    })
-    return ()=>ctx.revert()
-
-    },[])
     return(
-        <div className='list-levelDesc-container' style={{height: h}}>
+        <div className={LStyle.listLevelDescContainer} style={{height: h}}>
             {levels.map((leveled)=>(
-            <div key={leveled.id} className={`levelDesc-container`} id={`levelDesc${leveled.level}`}>
-                <img src={pointer} className='pointer' id={`levelDesc${leveled.level}0`}/>
+            <div key={leveled.id} className={LStyle.levelDescContainer} id={LStyle[`levelDesc${leveled.level}`]} ref={LevelDesc[leveled.level-1]}>
+                <img src={pointer} className={LStyle.pointer} alt='pointer' />
                     <h3>{`Level ${leveled.level}`}</h3>
-                    <div className='levelDesc-container-sub'>
+                    <div className={LStyle.levelDescContainerSub}>
                         <h4>{leveled.heading}</h4>
                         <p>{leveled.description}</p>
                     </div>
