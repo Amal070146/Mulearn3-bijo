@@ -26,7 +26,7 @@ const JourneyHeading = () => {
 }
 
 const JourneyBody = () => {
-    const [level,setLevel]=useState(1)
+    const [level]=useState(1)
 
     useLayoutEffect(() => {
         const ctx=gsap.context(()=>{
