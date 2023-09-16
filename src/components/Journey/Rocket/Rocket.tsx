@@ -7,13 +7,6 @@ import './Rocket.css'
 import './LevelDesc.css'
 import { levels } from './LevelData'
 import { useEffect, useState } from 'react'
-import gsap from 'gsap'
-import { ScrollTrigger ,MotionPathPlugin} from 'gsap/all'
-import { timeline } from '../utils/timeline'
-
-
-// import { timeline } from '../utils/timeline'
-gsap.registerPlugin(ScrollTrigger,MotionPathPlugin)
 
 const Rocket = () => {
     return (
@@ -26,40 +19,13 @@ const Rocket = () => {
     )
 }
 
-export const LevelDescriptions=()=>{
+export const LevelDescriptions=({level})=>{
     const [h,setH]=useState(0)
     const rocketHeight = document.getElementById('rocket')?.offsetHeight;
-    const [level,setLevel]=useState(1)
     const levelDetails=levels[level-1]
     useEffect(()=>{
         setH(rocketHeight)
     },[rocketHeight])
-    useEffect(() => {
-        const ctx=gsap.context(()=>{
-            const tl=gsap.timeline({
-                scrollTrigger: {
-                    trigger: document.querySelector('.Journey'),    
-                    start: 'top top',
-                    end: 'bottom top',
-                    markers: true,
-                    pin: true,
-                    scrub: true,
-                }
-        })
-        gsap.from('#journey-header', {
-            scrollTrigger: {
-                trigger: document.querySelector('.Journey'),    
-                start: 'top bottom',
-                end: 'top top',
-                scrub: true,
-            },
-            yPercent: -250
-        })
-        tl.add(timeline({setLevel}))
-    })
-    return ()=>ctx.revert()
-
-    },[])
     return(
         <div className='list-levelDesc-container' style={{height: h}}>
             <div key={levelDetails.id} className='levelDesc-container'>

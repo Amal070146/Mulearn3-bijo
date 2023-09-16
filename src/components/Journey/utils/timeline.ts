@@ -4,7 +4,7 @@ export const timeline=({setLevel})=>{
     const tl=gsap.timeline()
     tl.add(a())
     .add(b())
-    .add(c(setLevel))
+    .add(c())
     // tl.fromTo('.levelDesc-container',{
     //     onStart:()=>{
     //         console.log('level 2')
@@ -80,7 +80,7 @@ function b(){
     return tl
 }
 
-function c(setLevel){
+function c(){
     const tl=gsap.timeline({
         onStart:()=>{
             
