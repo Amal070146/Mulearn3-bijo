@@ -5,6 +5,7 @@ export const timeline=()=>{
     tl.add(a())
     .add(b())
     .add(c())
+    .add(d())
     return tl
 }
 
@@ -77,10 +78,9 @@ function c(){
             })   
         }
     })
-    tl.fromTo('.levelDesc-container',{
+    .fromTo('.levelDesc-container',{
         opacity:0,
         x:'+=300',
-        
     },{
         x:()=>{
             const rocketLayer1=document.querySelector(`#rocketLayer2`)
