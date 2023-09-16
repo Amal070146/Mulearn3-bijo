@@ -30,7 +30,7 @@ export const LevelDescriptions=()=>{
     const [h,setH]=useState(0)
     const rocketHeight = document.getElementById('rocket')?.offsetHeight;
     const [level]=useState(1)
-    const levelDetails=levels[level-1]
+    const levelDetails=levels[1]
     useEffect(()=>{
         setH(rocketHeight)
     },[rocketHeight])
@@ -40,7 +40,7 @@ export const LevelDescriptions=()=>{
                 scrollTrigger: {
                     trigger: document.querySelector('.Journey'),    
                     start: 'top top',
-                    end: 'bottom top',
+                    end: 'bottom+=3000 top',
                     markers: true,
                     pin: true,
                     scrub: true,
