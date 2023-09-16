@@ -45,6 +45,7 @@ function b(){
         opacity:0,
         x:'+=300',
     },'+=1.5')
+    // break Off
     tl.to('#rocketLayer1',{
         scale:0,
         rotate:360,
@@ -94,6 +95,14 @@ function c(){
         opacity:0,
         x:'+=300',
     },'+=1.5')
+
+    // break Off
+    tl.to('#rocketLayer2',{
+        scale:0,
+        rotate:360,
+        opacity:0,
+        x:'-=50',
+    })
     return tl
 }
 
@@ -111,7 +120,7 @@ function d(){
             })   
         },
         onReverseComplete:()=>{
-            const rocketLayer1=document.querySelector(`#rocketLayer1`)
+            const rocketLayer1=document.querySelector(`#rocketLayer2`)
             const levelDesc=document.querySelector('.levelDesc-container')
             const p=MotionPathPlugin.getRelativePosition(levelDesc,rocketLayer1,[0.5,0.5],[0.5,0.5])
             gsap.set('.levelDesc-container',{
@@ -138,5 +147,13 @@ function d(){
         opacity:0,
         x:'+=300',
     },'+=1.5')
+
+    // break Off
+    tl.to('#rocketLayer3',{
+        scale:0,
+        rotate:360,
+        opacity:0,
+        x:'-=50',
+    })
     return tl
 }
