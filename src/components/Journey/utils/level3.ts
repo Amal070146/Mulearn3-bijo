@@ -4,26 +4,21 @@ import MotionPathPlugin from "gsap/MotionPathPlugin"
 export function level3(){
     const tl=gsap.timeline({
         onStart:()=>{
-            gsap.set('#levelDesc3',{
-                display:'block',
-            })
+
             const rocketLayer1=document.querySelector(`#rocketLayer3`)
-            const levelDesc=document.querySelector('.levelDesc-container')
+            const levelDesc=document.querySelector('#levelDesc3')
             const p=MotionPathPlugin.getRelativePosition(levelDesc,rocketLayer1,[0.5,0.5],[0.5,0.5])
-            gsap.set('.levelDesc-container',{
+            gsap.set('#levelDesc3',{
                 opacity:0,
                 y:'+='+p.y,
                 x:'+='+p.x
             })   
         },
         onReverseComplete:()=>{
-            gsap.set('#levelDesc3',{
-                display:'none',
-            })
             const rocketLayer1=document.querySelector(`#rocketLayer2`)
-            const levelDesc=document.querySelector('.levelDesc-container')
+            const levelDesc=document.querySelector('#levelDesc3')
             const p=MotionPathPlugin.getRelativePosition(levelDesc,rocketLayer1,[0.5,0.5],[0.5,0.5])
-            gsap.set('.levelDesc-container',{
+            gsap.set('#levelDesc3',{
                 opacity:0,
                 y:'+='+p.y,
                 x:'+='+p.x
@@ -31,20 +26,20 @@ export function level3(){
             
         }
     })
-    tl.fromTo('.levelDesc-container',{
+    tl.fromTo('#levelDesc3',{
         opacity:0,
         x:'+=300',
         
     },{
         x:()=>{
             const rocketLayer1=document.querySelector(`#rocketLayer3`)
-            const levelDesc=document.querySelector('.levelDesc-container')
+            const levelDesc=document.querySelector('#levelDesc3')
             const x=MotionPathPlugin.getRelativePosition(levelDesc,rocketLayer1,[0,0],[1,1]).x
             return '+='+x
         },
         opacity:1,
     })
-    .to('.levelDesc-container',{
+    .to('#levelDesc3',{
         opacity:0,
         x:'+=300',
     },'+=1.5')

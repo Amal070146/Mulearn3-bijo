@@ -7,10 +7,7 @@ export function level2(){
             const rocketLayer1=document.querySelector(`#rocketLayer2`)
             const levelDesc=document.querySelector('#levelDesc2')
             const p=MotionPathPlugin.getRelativePosition(levelDesc,rocketLayer1,[0.5,0.5],[0.5,0.5])
-           
-            gsap.set('#levelDesc2',{
-                display:'block',
-            })
+        
             gsap.set('#levelDesc2',{
                 opacity:0,
                 y:'+='+p.y,
@@ -18,9 +15,6 @@ export function level2(){
             }) 
         },
         onReverseComplete:()=>{
-            gsap.set('#levelDesc2',{
-                display:'none',
-            })
             const rocketLayer1=document.querySelector(`#rocketLayer1`)
             const levelDesc=document.querySelector('#levelDesc2')
             const p=MotionPathPlugin.getRelativePosition(levelDesc,rocketLayer1,[0.5,0.5],[0.5,0.5])
