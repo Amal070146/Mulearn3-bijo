@@ -77,7 +77,7 @@ const CanvasAnimation: React.FC<ThreeDProps>= ({Journey}) => {
                 color="#aaffff"
             />
 
-            <mesh position={[0, 300, -30]} ref={Earth}>
+            <mesh position={[0, 300, -28]} ref={Earth}>
                 <sphereGeometry args={[20, 64, 64]} />
                 {earthTexture && <meshStandardMaterial map={earthTexture} />}
             </mesh>
