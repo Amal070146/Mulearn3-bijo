@@ -6,6 +6,8 @@ import { useEffect, useRef } from 'react'
 import gsap from 'gsap'
 import Style from './Journey.module.css'
 import { ScrollTrigger,MotionPathPlugin } from 'gsap/all'
+import ThreeD from '../R3F/R3F'
+
 gsap.registerPlugin(ScrollTrigger,MotionPathPlugin)
 const Journey = () => {
     const Journey=useRef<HTMLElement>(null)
@@ -56,16 +58,19 @@ const Journey = () => {
     },[LevelDesc, RocketLayer])
     return (
         <section className={Style.Journey}  ref={Journey}>
+            <div className={Style.canvasContainer}>
+            <ThreeD Journey={Journey}/>
+                </div>
             <h2 className={Style.headerText} ref={JourneyHead}  >
                 Journey at µLearn
             </h2>
             <div className={Style.journeyBodyContainer}>
-            <div className={Style.journeyBody}>
-                <img src={EarthImage} alt="Earth" className={Style.earth} id='earth' ref={Earth} />
-                <Rocket rocket={RocketRef} RocketLayer={RocketLayer} />
-                <LevelDescriptions LevelDesc={LevelDesc} Rocket={RocketRef}/>
+                <div className={Style.journeyBody}>
+                    <img src={EarthImage} alt="Earth" className={Style.earth} id='earth' ref={Earth} />
+                    <Rocket rocket={RocketRef} RocketLayer={RocketLayer} />
+                    <LevelDescriptions LevelDesc={LevelDesc} Rocket={RocketRef}/>
+                </div>
             </div>
-        </div>
         </section>
     )
 }

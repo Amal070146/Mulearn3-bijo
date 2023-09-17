@@ -4,7 +4,6 @@ import { levelAnimate } from './levelAnimate'
 // import { level3 } from './level3'
 // import { level4 } from './level4'
 import { DivElement, DivElementArray, ImageElement, ImageElementArray } from './types'
-import Rocket from '../Rocket/Rocket'
 
 
 export type TimelineProps={
@@ -49,11 +48,14 @@ function planetEntry(Earth:DivElement,Rocket:DivElement){
         rotate:-30
     })
     tl.from(Earth.current, {
+        opacity:0,
         yPercent: -50,
         xPercent: -50,
         scale:0,
         rotate:-360
     },'-=0.5')
-    
+    tl.to(Earth.current, {
+        opacity:1
+    })
     return tl
 }
