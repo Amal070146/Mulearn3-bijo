@@ -4,6 +4,9 @@
     height: 90%;
     position: absolute;
     overflow: visible;
+    top: 50%;
+    left: 50%;
+    transform: translateY(-50%) translateX(-50%);
 }
 .journeyBodyContainer{
     display: flex;
