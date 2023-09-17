@@ -1,4 +1,4 @@
-import EarthImage from '../../assets/earth.svg'
+// import EarthImage from '../../assets/earth.svg'
 
 import Rocket, { LevelDescriptions } from './Rocket/Rocket'
 import { timeline } from './utils/timeline'
@@ -66,7 +66,7 @@ const Journey = () => {
             </h2>
             <div className={Style.journeyBodyContainer}>
                 <div className={Style.journeyBody}>
-                    <img src={EarthImage} alt="Earth" className={Style.earth} id='earth' ref={Earth} />
+                    {/* <img src={EarthImage} alt="Earth" className={Style.earth} id='earth' ref={Earth} /> */}
                     <Rocket rocket={RocketRef} RocketLayer={RocketLayer} />
                     <LevelDescriptions LevelDesc={LevelDesc} Rocket={RocketRef}/>
                 </div>

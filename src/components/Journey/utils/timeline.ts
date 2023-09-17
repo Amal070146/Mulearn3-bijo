@@ -51,8 +51,5 @@ function planetEntry(Earth:DivElement){
         scale:0,
         rotate:-360
     },'-=0.5')
-    tl.to(Earth.current, {
-        opacity:1
-    })
     return tl
 }
